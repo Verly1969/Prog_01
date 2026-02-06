@@ -1,0 +1,27 @@
+<h1>Formulaire de profil</h1>
+
+<div id="container">
+    <div id="form">
+        <label for="fullname">Votre nom complet: </label>
+        <input type="text" [(ngModel)]="fullname" id="fullname">
+        <br>
+        <label for="email">Votre mail: </label>
+        <input type="email" [(ngModel)]="email" id="email">
+        <br>
+        <label for="birthdate">Votre date de naissance</label>
+        <input type="date" [(ngModel)]="dateOfBirth" id="birthdate">
+        <br>
+        <label for="gender">Votre genre: </label>
+        <input type="text" [(ngModel)]="gender" id="gender">
+        <br>
+    </div>
+    <div id="donnees">
+        <label>Votre nom est {{ fullname }}</label>
+        <br>
+        <label>Votre mail est {{ email }}</label>
+        <br>
+        <label>Votre date de naissance est {{ dateOfBirth.toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"}) }}</label>
+        <br>
+        <label>{{gender === "M" ? "Vous êtes un homme" : gender === "F" ? "Vous êtes une femme" : ""}}</label>
+    </div>
+</div>
