@@ -29,10 +29,10 @@ export class Demo01Interpolation implements OnInit, OnDestroy {
   constructor(){}
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
   }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    
   }
   
 }

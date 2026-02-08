@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-exo03',
@@ -9,33 +9,35 @@ import { Component, OnInit } from '@angular/core';
 export class Exo03 {
   
   
-  compteur: number = 0;
-  chrono: any;
-  isRunning: boolean = false;
+  compteur?: number;
+  chrono: WritableSignal<number> = signal(0);
   
-  start() 
-  {
-    if(!this.isRunning)
-      {
-        this.isRunning = true;
-        this.chrono = setInterval(() => {
-          this.compteur++;
-        }, 1000);
-      }
-    console.log(this.compteur);
+  increment() {
+    console.log(`Chrono ==> ${this.chrono()}`);
+    this.chrono.update(c => c + 1);
+  }
+
+  start() {
+    if(this.compteur !== undefined) return;
+
+    console.log(`Chrono démarré !`);
+    this.compteur = setInterval(() => {
+      this.increment();
+    }, 1000);
+      
   }
     
-  pause() 
+  stop() {
+    console.log(`Chrono est arrêté !`);
+    clearInterval(this.compteur);
+    this.compteur = undefined;
+  }
+  
+  reset()
     {
-      this.isRunning = false;
-      clearInterval(this.chrono)
-    }
-    stop()
-    {
-      this.pause();
-      this.compteur = 0;
-    }
-
-    
+      this.stop();
+      console.log(`Chrono remit à zéro !`);
+      this.chrono.set(0);
+    } 
   }
   
